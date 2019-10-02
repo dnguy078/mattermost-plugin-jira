@@ -84,6 +84,11 @@ export default class ChannelSettingsFilters extends React.PureComponent<ChannelS
 
         let error = null;
         const conflictingFields = this.getConflictingFields();
+        const nonConflictingFields = fields.filter((f) => {
+          return !conflictingFields.find((conf) => conf.field.key === f.key) 
+        })
+        
+        // DEBUG This is the error message shown. Make it generic
         if (conflictingFields.length) {
             error = (
                 <div>
@@ -112,7 +117,7 @@ export default class ChannelSettingsFilters extends React.PureComponent<ChannelS
                         return (
                             <li key={i}>
                                 <ChannelSettingsFilter
-                                    fields={fields}
+                                    fields={nonConflictingFields}
                                     field={field}
                                     value={v}
                                     chosenIssueTypes={this.props.chosenIssueTypes}
@@ -129,7 +134,7 @@ export default class ChannelSettingsFilters extends React.PureComponent<ChannelS
                     {showCreateRow && (
                         <li>
                             <EmptyChannelSettingsFilter
-                                fields={fields}
+                                fields={nonConflictingFields}
                                 chosenIssueTypes={this.props.chosenIssueTypes}
                                 issueMetadata={this.props.issueMetadata}
                                 onChange={this.onConfiguredValueChange}
