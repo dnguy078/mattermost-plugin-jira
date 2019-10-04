@@ -173,6 +173,7 @@ export default class ConfirmModal extends PureComponent<Props, State> {
                 onExited={this.props.onExited}
                 id='confirmModal'
                 role='dialog'
+                style={{zIndex: 2001}}
                 aria-labelledby='confirmModalLabel'
             >
                 <Modal.Header closeButton={false}>
